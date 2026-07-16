@@ -282,5 +282,5 @@ SOFTWARE.
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ oleh <strong>dibiEdu Team</strong>
+  Dibuat untuk memenuhi penugasan Bootcamp FWD 11 Dibimbing, <strong>Mini Project: React</strong>
 </p>
