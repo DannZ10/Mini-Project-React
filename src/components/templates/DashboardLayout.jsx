@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '@/modules/auth/useAuth';
+import { logoUrl } from '@/data/data';
 
 const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
-    
-    // Default open on desktop (>=1024px), closed on mobile
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
 
-    // Auto toggle on resize
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 1024) {
@@ -27,10 +26,9 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
         navigate('/login');
     };
 
-    // Role-specific navigation items configuration
     const getNavItems = () => {
         const role = user?.role || 'student';
-        
+
         if (role === 'admin') {
             return [
                 { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
@@ -48,7 +46,6 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
                 { id: 'settings', label: 'Settings', icon: 'settings' }
             ];
         } else {
-            // Student items
             return [
                 { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
                 { id: 'courses', label: 'Enrolled Courses', icon: 'school' },
@@ -64,34 +61,33 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
 
     return (
         <div className="min-h-screen bg-background font-body-md text-on-background flex antialiased">
-            
+
             {/* Mobile Backdrop overlay */}
             {isSidebarOpen && (
-                <div 
+                <div
                     className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
 
             {/* Left Sidebar (280px) - Collapsible */}
-            <aside className={`fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest z-50 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-outline-variant/15 text-left transform transition-transform duration-300 ease-in-out ${
-                isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}>
+            <aside className={`fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest z-50 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-outline-variant/15 text-left transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}>
                 {/* Logo Area */}
-                <div 
+                <div
                     onClick={() => navigate('/')}
                     className="p-6 flex items-center justify-between border-b border-outline-variant/10 cursor-pointer"
                 >
                     <div className="flex items-center gap-3">
-                        <img 
-                            alt="dibiEdu logo" 
-                            className="h-8 w-auto object-contain" 
-                            src="https://lh3.googleusercontent.com/aida/AP1WRLvxPfEHLHHECFlTQ0IzFZirqRnpVxgSt2WbQuuHzi2Oc1hm_TxPhJQUwaow6RSwzSSi_Caasye2lR6DmTBAQZnHNJS9FYXObnM3OtGxWig64gc6f4wxuJKOa5_M8tFV_rOYZBxYL6CclKFcAGlYI0T4G8WU3Q_dWeAHocOim9wXmIcrrJo8EbwgJw8e0walYF0vxC3ClcajIm_WZ5qRQZOJCAZh2ZoQeoDZ3e0q-T3_hqODNozWMIU0i0g" 
+                        <img
+                            alt="dibiEdu logo"
+                            className="h-8 w-auto object-contain"
+                            src={logoUrl}
                         />
                         <span className="font-display-lg text-[22px] font-bold tracking-tight text-primary">dibiEdu</span>
                     </div>
                     {/* Mobile close button inside sidebar */}
-                    <button 
+                    <button
                         onClick={() => setIsSidebarOpen(false)}
                         className="lg:hidden p-1 text-on-surface-variant hover:bg-surface-container rounded-full"
                     >
@@ -111,11 +107,10 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
                                         navigate('/');
                                     }
                                 }}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group cursor-pointer ${
-                                    isActive 
-                                        ? 'bg-primary/10 text-primary font-semibold border-l-4 border-primary' 
-                                        : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
-                                }`}
+                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group cursor-pointer ${isActive
+                                    ? 'bg-primary/10 text-primary font-semibold border-l-4 border-primary'
+                                    : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
+                                    }`}
                             >
                                 <span className={`material-symbols-outlined text-[22px] group-hover:scale-105 transition-transform ${isActive ? 'text-primary' : 'text-on-surface-variant/75'}`}>
                                     {item.icon}
@@ -128,7 +123,7 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
 
                 {/* Bottom Sign Out Area */}
                 <div className="p-6 border-t border-outline-variant/20">
-                    <button 
+                    <button
                         onClick={handleSignOut}
                         className="w-full flex items-center gap-3 text-on-surface-variant hover:text-error transition-colors cursor-pointer group"
                     >
@@ -139,19 +134,17 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
             </aside>
 
             {/* Right Main Panel */}
-            <div className={`flex-grow min-h-screen flex flex-col transition-all duration-300 ease-in-out ${
-                isSidebarOpen ? 'lg:pl-[280px]' : 'lg:pl-0'
-            }`}>
-                
-                {/* Fixed Header */}
-                <header className={`fixed top-0 left-0 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-6 lg:px-8 flex items-center justify-between border-b border-outline-variant/10 shadow-[0_1px_4px_rgba(0,0,0,0.02)] transition-all duration-300 ease-in-out ${
-                    isSidebarOpen ? 'lg:left-[280px]' : 'lg:left-0'
+            <div className={`flex-grow min-h-screen flex flex-col transition-all duration-300 ease-in-out ${isSidebarOpen ? 'lg:pl-[280px]' : 'lg:pl-0'
                 }`}>
-                    
+
+                {/* Fixed Header */}
+                <header className={`fixed top-0 left-0 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-6 lg:px-8 flex items-center justify-between border-b border-outline-variant/10 shadow-[0_1px_4px_rgba(0,0,0,0.02)] transition-all duration-300 ease-in-out ${isSidebarOpen ? 'lg:left-[280px]' : 'lg:left-0'
+                    }`}>
+
                     {/* Collapsible toggle & Search bar */}
                     <div className="flex items-center flex-1 max-w-xl text-left">
                         {/* Toggle Button */}
-                        <button 
+                        <button
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                             className="p-2 mr-4 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer flex items-center justify-center"
                             aria-label="Toggle Sidebar"
@@ -163,9 +156,9 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
                             <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors text-[20px]">
                                 search
                             </span>
-                            <input 
-                                className="w-full bg-surface-container-low border border-outline-variant/20 rounded-full py-2 pl-11 pr-4 text-xs focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all" 
-                                placeholder="Search for courses, activities, or data..." 
+                            <input
+                                className="w-full bg-surface-container-low border border-outline-variant/20 rounded-full py-2 pl-11 pr-4 text-xs focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all"
+                                placeholder="Search for courses, activities, or data..."
                                 type="text"
                             />
                         </div>
@@ -177,7 +170,7 @@ const DashboardLayout = ({ children, activeTab = 'dashboard' }) => {
                             <span className="material-symbols-outlined text-[22px]">notifications</span>
                             <span className="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
                         </button>
-                        
+
                         <div className="flex items-center gap-3 pl-4 border-l border-outline-variant/20">
                             <div className="text-right hidden sm:block">
                                 <div className="font-label-sm text-xs font-semibold text-on-surface">{user?.name || 'Academic Member'}</div>

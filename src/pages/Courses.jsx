@@ -5,18 +5,15 @@ import { CourseCardSkeleton } from '@/components/atoms/Skeleton';
 import { getCourses, getCategories } from '@/modules/courses/courses.api';
 
 const Courses = () => {
-    // API States
     const [courses, setCourses] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Filter and Pagination States
     const [search, setSearch] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState(null); // category ID or null
-    const [visibleCount, setVisibleCount] = useState(6); // Show 6 courses initially
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [visibleCount, setVisibleCount] = useState(6);
 
-    // Load Categories once on mount
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -31,7 +28,6 @@ const Courses = () => {
         fetchCategories();
     }, []);
 
-    // Load Courses whenever search or category selection changes
     useEffect(() => {
         const fetchCourses = async () => {
             setLoading(true);
@@ -57,21 +53,20 @@ const Courses = () => {
 
         const delayDebounce = setTimeout(() => {
             fetchCourses();
-        }, 300); // 300ms debounce for search inputs
+        }, 300);
 
         return () => clearTimeout(delayDebounce);
     }, [search, selectedCategory]);
 
     const handleCategoryClick = (categoryId) => {
         setSelectedCategory(categoryId === selectedCategory ? null : categoryId);
-        setVisibleCount(6); // Reset pagination count on filter change
+        setVisibleCount(6);
     };
 
     const handleLoadMore = () => {
         setVisibleCount((prev) => prev + 6);
     };
 
-    // Filtered courses based on visibility count (pagination)
     const paginatedCourses = courses.slice(0, visibleCount);
 
     return (

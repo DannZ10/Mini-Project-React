@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '@/components/organisms/Navbar';
+import { logoUrl } from '@/data/data';
 
 const MainLayout = ({ children }) => {
     return (
@@ -21,7 +22,7 @@ const MainLayout = ({ children }) => {
                                 <img 
                                     alt="dibiEdu Logo" 
                                     className="h-8 w-auto" 
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLvxPfEHLHHECFlTQ0IzFZirqRnpVxgSt2WbQuuHzi2Oc1hm_TxPhJQUwaow6RSwzSSi_Caasye2lR6DmTBAQZnHNJS9FYXObnM3OtGxWig64gc6f4wxuJKOa5_M8tFV_rOYZBxYL6CclKFcAGlYI0T4G8WU3Q_dWeAHocOim9wXmIcrrJo8EbwgJw8e0walYF0vxC3ClcajIm_WZ5qRQZOJCAZh2ZoQeoDZ3e0q-T3_hqODNozWMIU0i0g"
+                                    src={logoUrl}
                                 />
                                 <span className="font-headline-md text-headline-md text-primary">dibiEdu</span>
                             </div>

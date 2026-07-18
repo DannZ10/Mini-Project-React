@@ -8,7 +8,6 @@ const api = axios.create({
     }
 });
 
-// INTERCEPTOR: Runs BEFORE every request is sent
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');

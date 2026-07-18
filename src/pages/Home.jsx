@@ -4,6 +4,7 @@ import MainLayout from '@/components/templates/MainLayout';
 import CourseCard from '@/components/molecules/CourseCard';
 import { CourseCardSkeleton } from '@/components/atoms/Skeleton';
 import { getCourses } from '@/modules/courses/courses.api';
+import { testimonials, features, homeStats } from '@/data/data';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -11,14 +12,12 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Fetch courses and take top 3 for featured section
     useEffect(() => {
         const fetchFeaturedCourses = async () => {
             setLoading(true);
             try {
                 const response = await getCourses({ sort_by: 'rating', order: 'desc' });
                 if (response.success && response.data) {
-                    // Take the first 3 courses
                     setFeaturedCourses(response.data.slice(0, 3));
                 }
             } catch (err) {
@@ -31,30 +30,6 @@ const Home = () => {
         fetchFeaturedCourses();
     }, []);
 
-    // Static Testimonials Data
-    const testimonials = [
-        {
-            name: "Sarah Connors",
-            role: "Software Engineer at TechCorp",
-            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
-            rating: 5,
-            comment: "dibiEdu changed my career trajectory! The Advanced Frontend course was extremely structured and hands-on. I landed a job in 3 months."
-        },
-        {
-            name: "David Jenkins",
-            role: "Graphic Designer",
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-            rating: 5,
-            comment: "The UI/UX Masterclass was outstanding. I learned how to build production-ready design systems in Figma and present them effectively."
-        },
-        {
-            name: "Lina Alvarez",
-            role: "Data Analyst",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
-            rating: 5,
-            comment: "The Python for Machine Learning course made complex mathematical algorithms so easy to understand. Highly recommended!"
-        }
-    ];
 
     return (
         <MainLayout>
@@ -155,42 +130,17 @@ const Home = () => {
                 <section className="w-full bg-surface-container py-10 relative z-20 border-y border-outline-variant/10">
                     <div className="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                            <div className="flex items-center space-x-4 justify-center">
-                                <div className="w-12 h-12 rounded-xl bg-primary-fixed/50 flex items-center justify-center text-primary">
-                                    <span className="material-symbols-outlined text-[28px]">group</span>
+                            {homeStats.map((stat, idx) => (
+                                <div key={idx} className="flex items-center space-x-4 justify-center">
+                                    <div className={`w-12 h-12 rounded-xl ${stat.bgClass} flex items-center justify-center ${stat.textClass}`}>
+                                        <span className="material-symbols-outlined text-[28px]">{stat.icon}</span>
+                                    </div>
+                                    <div className="flex flex-col text-left">
+                                        <span className="font-headline-lg text-on-surface text-xl lg:text-2xl leading-tight font-bold">{stat.value}</span>
+                                        <span className="font-body-sm text-on-surface-variant text-xs">{stat.label}</span>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col text-left">
-                                    <span className="font-headline-lg text-on-surface text-xl lg:text-2xl leading-tight font-bold">10,000+</span>
-                                    <span className="font-body-sm text-on-surface-variant text-xs">Active Learners</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center space-x-4 justify-center">
-                                <div className="w-12 h-12 rounded-xl bg-tertiary-fixed-dim/30 flex items-center justify-center text-tertiary">
-                                    <span className="material-symbols-outlined text-[28px]">menu_book</span>
-                                </div>
-                                <div className="flex flex-col text-left">
-                                    <span className="font-headline-lg text-on-surface text-xl lg:text-2xl leading-tight font-bold">200+</span>
-                                    <span className="font-body-sm text-on-surface-variant text-xs">Online Courses</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center space-x-4 justify-center">
-                                <div className="w-12 h-12 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
-                                    <span className="material-symbols-outlined text-[28px]">emoji_events</span>
-                                </div>
-                                <div className="flex flex-col text-left">
-                                    <span className="font-headline-lg text-on-surface text-xl lg:text-2xl leading-tight font-bold">95%</span>
-                                    <span className="font-body-sm text-on-surface-variant text-xs">Success Rate</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center space-x-4 justify-center">
-                                <div className="w-12 h-12 rounded-xl bg-primary-fixed-dim/30 flex items-center justify-center text-primary-container">
-                                    <span className="material-symbols-outlined text-[28px]">public</span>
-                                </div>
-                                <div className="flex flex-col text-left">
-                                    <span className="font-headline-lg text-on-surface text-xl lg:text-2xl leading-tight font-bold">50+</span>
-                                    <span className="font-body-sm text-on-surface-variant text-xs">Expert Instructors</span>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -206,51 +156,17 @@ const Home = () => {
                             </p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                            {/* Feature 1 */}
-                            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-outline-variant/40 group text-left">
-                                <div className="w-12 h-12 rounded-xl bg-primary/10 mb-4 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-                                    <span className="material-symbols-outlined text-[28px]">school</span>
+                            {features.map((feature) => (
+                                <div key={feature.id} className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-outline-variant/40 group text-left">
+                                    <div className={`w-12 h-12 rounded-xl ${feature.iconBgClass} mb-4 flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                                        <span className="material-symbols-outlined text-[28px]">{feature.icon}</span>
+                                    </div>
+                                    <h3 className="font-headline-md text-base text-on-surface mb-2 font-semibold">{feature.title}</h3>
+                                    <p className="font-body-sm text-sm text-on-surface-variant">
+                                        {feature.description}
+                                    </p>
                                 </div>
-                                <h3 className="font-headline-md text-base text-on-surface mb-2 font-semibold">Expert Instructors</h3>
-                                <p className="font-body-sm text-sm text-on-surface-variant">
-                                    Learn from industry experts with real-world experience and proven teaching methodologies.
-                                </p>
-                            </div>
-
-                            {/* Feature 2 */}
-                            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-outline-variant/40 group text-left">
-                                <div className="w-12 h-12 rounded-xl bg-secondary/10 mb-4 flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
-                                    <span className="material-symbols-outlined text-[28px]">schedule</span>
-                                </div>
-                                <h3 className="font-headline-md text-base text-on-surface mb-2 font-semibold">Flexible Learning</h3>
-                                <p className="font-body-sm text-sm text-on-surface-variant">
-                                    Access courses on any device. Learn at your own pace, anytime, anywhere that suits you.
-                                </p>
-                            </div>
-
-                            {/* Feature 3 */}
-                            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-outline-variant/40 group text-left">
-                                <div className="w-12 h-12 rounded-xl bg-tertiary/10 mb-4 flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
-                                    <span className="material-symbols-outlined text-[28px]">trending_up</span>
-                                </div>
-                                <h3 className="font-headline-md text-base text-on-surface mb-2 font-semibold">Track Progress</h3>
-                                <p className="font-body-sm text-sm text-on-surface-variant">
-                                    Monitor your learning journey with detailed analytics and progress tracking tools.
-                                </p>
-                            </div>
-
-                            {/* Feature 4 */}
-                            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-outline-variant/40 group text-left">
-                                <div className="w-12 h-12 rounded-xl bg-primary/10 mb-4 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-                                    <span className="material-symbols-outlined text-[28px]">workspace_premium</span>
-                                </div>
-                                <h3 className="font-headline-md text-base text-on-surface mb-2 font-semibold">Certifications</h3>
-                                <p className="font-body-sm text-sm text-on-surface-variant">
-                                    Earn globally recognized certificates upon completion to boost your career opportunities.
-                                </p>
-                            </div>
-
+                            ))}
                         </div>
                     </div>
                 </section>

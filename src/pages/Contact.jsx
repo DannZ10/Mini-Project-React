@@ -9,7 +9,7 @@ const Contact = () => {
         subject: 'sales',
         message: ''
     });
-    
+
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
@@ -20,8 +20,7 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        
-        // Simulate form sending
+
         setTimeout(() => {
             setLoading(false);
             setSubmitted(true);
@@ -43,10 +42,10 @@ const Contact = () => {
     return (
         <MainLayout>
             <div className="flex flex-col w-full max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop py-12 lg:py-24 gap-16 relative overflow-hidden text-left lg:gap-24">
-                
+
                 {/* Decorative Background */}
                 <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none translate-x-1/4 -translate-y-1/4"></div>
-                
+
                 {/* Header Title Section */}
                 <section className="flex flex-col items-start gap-4 max-w-3xl">
                     <div className="flex items-center gap-4">
@@ -63,11 +62,11 @@ const Contact = () => {
 
                 {/* Grid Content Columns */}
                 <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative z-10 items-start">
-                    
+
                     {/* Left Column: Contact Cards */}
                     <div className="lg:col-span-5 flex flex-col gap-12">
                         <div className="flex flex-col gap-8">
-                            
+
                             {/* Email Support Card */}
                             <div className="flex items-start gap-6 group">
                                 <div className="w-14 h-14 rounded-2xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-primary group-hover:text-on-primary group-hover:shadow-lg group-hover:-translate-y-1 shadow-md">
@@ -113,7 +112,7 @@ const Contact = () => {
                                     <h3 className="font-headline-md text-headline-md text-on-surface text-base lg:text-lg">Global HQ</h3>
                                     <p className="font-body-sm text-body-sm text-on-surface-variant mb-2 text-xs">Come visit our state-of-the-art campus.</p>
                                     <p className="font-body-md text-body-md text-on-surface text-sm leading-relaxed">
-                                        100 Innovation Drive<br/>
+                                        100 Innovation Drive<br />
                                         San Francisco, CA 94105
                                     </p>
                                 </div>
@@ -124,8 +123,8 @@ const Contact = () => {
                         {/* Interactive Campus Tour Link */}
                         <div className="mt-8 relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] group cursor-pointer border border-outline-variant/30">
                             <div className="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-40"></div>
-                            <img 
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                            <img
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 src={campusImageUrl}
                                 alt="Modern campus office"
                             />
@@ -141,7 +140,7 @@ const Contact = () => {
                     {/* Right Column: Contact Inquiry Form */}
                     <div className="lg:col-span-7 w-full">
                         <div className="bg-surface-container-lowest border border-outline-variant/35 rounded-[2rem] p-8 lg:p-12 relative shadow-xl overflow-hidden min-h-[500px]">
-                            
+
                             {/* Accent Circle Decoration */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none"></div>
 
@@ -150,17 +149,17 @@ const Contact = () => {
                                     <h2 className="font-headline-lg text-headline-lg text-on-surface mb-8 text-xl lg:text-2xl">Send a Message</h2>
                                     <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                                            
+
                                             {/* First Name */}
                                             <div className="flex flex-col gap-2 relative">
                                                 <label className="font-label-md text-label-md text-on-surface-variant text-xs" htmlFor="firstName">First Name</label>
                                                 <div className="relative group w-full">
                                                     <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors z-10">person</span>
-                                                    <input 
-                                                        className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                        id="firstName" 
-                                                        name="firstName" 
-                                                        required 
+                                                    <input
+                                                        className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                        id="firstName"
+                                                        name="firstName"
+                                                        required
                                                         type="text"
                                                         value={formData.firstName}
                                                         onChange={handleChange}
@@ -173,11 +172,11 @@ const Contact = () => {
                                                 <label className="font-label-md text-label-md text-on-surface-variant text-xs" htmlFor="lastName">Last Name</label>
                                                 <div className="relative group w-full">
                                                     <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors z-10">person</span>
-                                                    <input 
-                                                        className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                        id="lastName" 
-                                                        name="lastName" 
-                                                        required 
+                                                    <input
+                                                        className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                        id="lastName"
+                                                        name="lastName"
+                                                        required
                                                         type="text"
                                                         value={formData.lastName}
                                                         onChange={handleChange}
@@ -192,11 +191,11 @@ const Contact = () => {
                                             <label className="font-label-md text-label-md text-on-surface-variant text-xs" htmlFor="email">Work Email</label>
                                             <div className="relative group w-full">
                                                 <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors z-10">alternate_email</span>
-                                                <input 
-                                                    className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                    id="email" 
-                                                    name="email" 
-                                                    required 
+                                                <input
+                                                    className="w-full h-14 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                    id="email"
+                                                    name="email"
+                                                    required
                                                     type="email"
                                                     value={formData.email}
                                                     onChange={handleChange}
@@ -209,9 +208,9 @@ const Contact = () => {
                                             <label className="font-label-md text-label-md text-on-surface-variant text-xs" htmlFor="subject">Subject</label>
                                             <div className="relative group w-full">
                                                 <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors z-10">topic</span>
-                                                <select 
-                                                    className="w-full h-14 pl-12 pr-10 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer text-left" 
-                                                    id="subject" 
+                                                <select
+                                                    className="w-full h-14 pl-12 pr-10 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer text-left"
+                                                    id="subject"
                                                     name="subject"
                                                     value={formData.subject}
                                                     onChange={handleChange}
@@ -230,11 +229,11 @@ const Contact = () => {
                                             <label className="font-label-md text-label-md text-on-surface-variant text-xs" htmlFor="message">How can we help?</label>
                                             <div className="relative group w-full">
                                                 <span className="material-symbols-outlined absolute left-4 top-4 text-outline group-focus-within:text-primary transition-colors z-10">chat</span>
-                                                <textarea 
-                                                    className="w-full pt-4 pb-4 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all resize-none text-left" 
-                                                    id="message" 
-                                                    name="message" 
-                                                    required 
+                                                <textarea
+                                                    className="w-full pt-4 pb-4 pl-12 pr-4 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all resize-none text-left"
+                                                    id="message"
+                                                    name="message"
+                                                    required
                                                     rows="5"
                                                     value={formData.message}
                                                     onChange={handleChange}
@@ -243,15 +242,15 @@ const Contact = () => {
                                         </div>
 
                                         {/* Submit Button */}
-                                        <button 
+                                        <button
                                             disabled={loading}
-                                            className="w-full bg-primary hover:bg-primary-container text-on-primary font-label-md py-4 rounded-xl shadow-[0_8px_20px_rgba(37,99,235,0.25)] flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed" 
+                                            className="w-full bg-primary hover:bg-primary-container text-on-primary font-label-md py-4 rounded-xl shadow-[0_8px_20px_rgba(37,99,235,0.25)] flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                                             type="submit"
                                         >
                                             {loading ? 'Sending Message...' : 'Send Message'}
                                             <span className="material-symbols-outlined text-[20px]">send</span>
                                         </button>
-                                        
+
                                         <p className="font-body-sm text-body-sm text-on-surface-variant text-center text-xs mt-2">
                                             By submitting this form, you agree to our <a className="text-primary hover:underline" href="#">Privacy Policy</a>.
                                         </p>
@@ -267,7 +266,7 @@ const Contact = () => {
                                     <p className="font-body-lg text-body-lg text-on-surface-variant text-sm lg:text-base max-w-sm mb-8 leading-relaxed">
                                         Thank you for reaching out, {formData.firstName}. A member of our team will get back to you within 24 hours.
                                     </p>
-                                    <button 
+                                    <button
                                         onClick={handleReset}
                                         className="px-6 py-3 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors cursor-pointer"
                                     >
@@ -290,13 +289,13 @@ const Contact = () => {
                             <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-xs">San Francisco HQ</span>
                         </div>
                     </div>
-                    
+
                     <div className="w-full h-[400px] lg:h-[500px] rounded-[2rem] overflow-hidden shadow-md relative group border border-outline-variant/30">
-                        <div 
-                            className="w-full h-full bg-surface-container-high bg-cover bg-center transition-transform duration-[1500ms] group-hover:scale-105" 
+                        <div
+                            className="w-full h-full bg-surface-container-high bg-cover bg-center transition-transform duration-[1500ms] group-hover:scale-105"
                             style={{ backgroundImage: `url('${mapImageUrl}')` }}
                         ></div>
-                        
+
                         {/* Map Directions Card Overlay */}
                         <div className="absolute bottom-6 left-6 right-6 lg:left-8 lg:right-auto lg:w-80 bg-surface/90 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-on-surface/5 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 text-left">
                             <div className="flex items-center gap-3 mb-4">
@@ -308,9 +307,9 @@ const Contact = () => {
                                     <p className="font-body-sm text-body-sm text-on-surface-variant text-xs">View in Google Maps</p>
                                 </div>
                             </div>
-                            <a 
-                                href="https://maps.google.com" 
-                                target="_blank" 
+                            <a
+                                href="https://maps.google.com"
+                                target="_blank"
                                 rel="noreferrer"
                                 className="w-full block py-2.5 bg-surface-container text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-high transition-colors text-center text-sm font-semibold"
                             >

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '@/modules/auth/useAuth';
 import { logoutUser } from '@/modules/auth/auth.api';
+import { logoUrl } from '@/data/data';
 
 const Navbar = () => {
     const { user, token, logout } = useAuth();
@@ -10,29 +11,26 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            // Trigger API logout (invalidate Sanctum token)
             await logoutUser();
         } catch (e) {
             console.error("API logout failed, performing local logout", e);
         } finally {
-            // Remove local states
             logout();
             navigate('/login');
         }
     };
 
-    const logoUrl = 'https://lh3.googleusercontent.com/aida/AP1WRLvxPfEHLHHECFlTQ0IzFZirqRnpVxgSt2WbQuuHzi2Oc1hm_TxPhJQUwaow6RSwzSSi_Caasye2lR6DmTBAQZnHNJS9FYXObnM3OtGxWig64gc6f4wxuJKOa5_M8tFV_rOYZBxYL6CclKFcAGlYI0T4G8WU3Q_dWeAHocOim9wXmIcrrJo8EbwgJw8e0walYF0vxC3ClcajIm_WZ5qRQZOJCAZh2ZoQeoDZ3e0q-T3_hqODNozWMIU0i0g';
 
     return (
         <>
             <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/20">
                 <div className="h-20 max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
-                    
+
                     {/* Logo and Brand */}
                     <div onClick={() => navigate('/')} className="flex items-center gap-3 cursor-pointer">
-                        <img 
-                            alt="dibiEdu Logo" 
-                            className="h-8 w-auto object-contain" 
+                        <img
+                            alt="dibiEdu Logo"
+                            className="h-8 w-auto object-contain"
                             src={logoUrl}
                         />
                         <span className="font-headline-md text-headline-md text-primary tracking-tight">dibiEdu</span>
@@ -74,7 +72,7 @@ const Navbar = () => {
                                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-semibold text-xs uppercase shadow-sm">
                                         {user.name?.charAt(0)}
                                     </div>
-                                    <button 
+                                    <button
                                         onClick={handleLogout}
                                         className="hidden sm:flex font-label-md text-label-md text-error px-4 py-2 hover:bg-error-container/20 rounded-full transition-all items-center gap-1 cursor-pointer"
                                     >
@@ -84,14 +82,14 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Link 
-                                        to="/login" 
+                                    <Link
+                                        to="/login"
                                         className="hidden sm:block font-label-md text-label-md text-primary px-4 py-2 hover:bg-primary-fixed rounded-lg transition-all"
                                     >
                                         Log In
                                     </Link>
-                                    <Link 
-                                        to="/login" 
+                                    <Link
+                                        to="/login"
                                         className="hidden sm:block font-label-md text-label-md bg-primary text-on-primary px-6 py-2.5 rounded-full hover:bg-primary-container transition-all shadow-sm active:scale-95"
                                     >
                                         Sign Up
@@ -100,8 +98,7 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        {/* Hamburger Button for Mobile */}
-                        <button 
+                        <button
                             onClick={() => setIsSidebarOpen(true)}
                             className="flex md:hidden p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer"
                             aria-label="Open navigation menu"
@@ -113,11 +110,10 @@ const Navbar = () => {
                 </div>
             </header>
 
-            {/* Sidebar drawer overlay — rendered OUTSIDE header to avoid stacking context issues */}
             {isSidebarOpen && (
                 <>
                     {/* Backdrop */}
-                    <div 
+                    <div
                         className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90]"
                         onClick={() => setIsSidebarOpen(false)}
                     />
@@ -130,7 +126,7 @@ const Navbar = () => {
                                     <img alt="dibiEdu logo" className="h-6 w-auto" src={logoUrl} />
                                     <span className="font-headline-md text-base text-primary font-bold">dibiEdu</span>
                                 </div>
-                                <button 
+                                <button
                                     onClick={() => setIsSidebarOpen(false)}
                                     className="p-1 text-on-surface-variant hover:bg-surface-container rounded-full cursor-pointer"
                                 >
@@ -176,7 +172,7 @@ const Navbar = () => {
                                             <span className="text-[10px] text-on-surface-variant uppercase">{user.role}</span>
                                         </div>
                                     </div>
-                                    <button 
+                                    <button
                                         onClick={() => { handleLogout(); setIsSidebarOpen(false); }}
                                         className="w-full font-label-md text-sm text-error px-4 py-2.5 bg-error-container/10 hover:bg-error-container/20 rounded-xl transition-all flex items-center justify-center gap-1 cursor-pointer"
                                     >
@@ -186,15 +182,15 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div className="flex flex-col gap-3">
-                                    <Link 
-                                        to="/login" 
+                                    <Link
+                                        to="/login"
                                         onClick={() => setIsSidebarOpen(false)}
                                         className="w-full text-center font-label-md text-sm text-primary py-2.5 border border-primary/20 rounded-xl hover:bg-primary-fixed transition-all"
                                     >
                                         Log In
                                     </Link>
-                                    <Link 
-                                        to="/login" 
+                                    <Link
+                                        to="/login"
                                         onClick={() => setIsSidebarOpen(false)}
                                         className="w-full text-center font-label-md text-sm bg-primary text-on-primary py-2.5 rounded-xl hover:bg-primary-container transition-all"
                                     >

@@ -13,7 +13,6 @@ const StudentDashboard = () => {
             try {
                 const response = await getCourses();
                 if (response.success && response.data) {
-                    // Simulating enrolled courses by taking the first few elements from seeded list
                     setEnrolledCourses(response.data.slice(0, 2));
                 }
             } catch (err) {
@@ -30,15 +29,15 @@ const StudentDashboard = () => {
     return (
         <DashboardLayout activeTab="dashboard">
             <div className="flex flex-col w-full text-left gap-8 pb-12">
-                
+
                 {/* Current Focus Welcome Banner */}
                 <div className="w-full relative rounded-2xl overflow-hidden shadow-md border border-outline-variant/20">
-                    <div 
-                        className="absolute inset-0 bg-cover bg-center" 
+                    <div
+                        className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url('${focusBannerImg}')` }}
                     ></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-on-background/90 via-on-background/60 to-transparent mix-blend-multiply"></div>
-                    
+
                     <div className="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8 text-on-primary">
                         <div className="flex-grow space-y-6">
                             <div className="space-y-2">
@@ -53,7 +52,7 @@ const StudentDashboard = () => {
                                     Welcome back, {user?.name || 'Student'}. Master the art of translating complex data into compelling, interactive visual narratives. You're currently in Module 4: Scales and Axes.
                                 </p>
                             </div>
-                            
+
                             <div className="space-y-3 max-w-md">
                                 <div className="flex justify-between font-label-sm text-surface-container text-xs">
                                     <span>Course Progress</span>
@@ -64,7 +63,7 @@ const StudentDashboard = () => {
                                 </div>
                                 <p className="text-[11px] text-primary-fixed-dim font-semibold">Next Lesson: Implementing Time Scales (15 mins)</p>
                             </div>
-                            
+
                             <div className="pt-4 flex gap-4">
                                 <button className="px-5 py-3 bg-primary text-on-primary font-label-sm rounded-lg hover:bg-primary-container transition-colors shadow-lg flex items-center gap-2 text-xs font-semibold cursor-pointer">
                                     <span className="material-symbols-outlined text-[16px]">play_arrow</span>
@@ -80,13 +79,13 @@ const StudentDashboard = () => {
 
                 {/* Grid Split section */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
+
                     {/* Left 2 Columns: Time spent, Certs, Enrolled courses */}
                     <div className="lg:col-span-2 flex flex-col gap-8">
-                        
+
                         {/* Weekly log & Certs summary row */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            
+
                             {/* Study time stat box */}
                             <div className="bg-surface-container rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group border border-outline-variant/10">
                                 <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500"></div>
@@ -99,7 +98,7 @@ const StudentDashboard = () => {
                                             <h3 className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Weekly Study Time</h3>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="flex flex-col justify-end pb-2">
                                         <div className="flex items-baseline gap-2">
                                             <span className="font-display-lg text-3xl text-on-surface leading-none font-bold">12.5</span>
@@ -139,7 +138,7 @@ const StudentDashboard = () => {
                                             <h3 className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Certifications</h3>
                                         </div>
                                     </div>
-                                    
+
                                     {/* Circle Progress Visual */}
                                     <div className="flex justify-center items-center py-2">
                                         <div className="relative w-24 h-24">
@@ -157,7 +156,7 @@ const StudentDashboard = () => {
                                     <div className="bg-surface rounded-lg p-2.5 flex flex-col items-center justify-center shadow-sm text-xs">
                                         <span className="text-[11px] text-on-surface-variant">Next: <strong className="text-on-surface">UX Principles</strong></span>
                                         <span className="text-[10px] text-primary mt-1 font-semibold flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-[12px]">lock_open</span> 
+                                            <span className="material-symbols-outlined text-[12px]">lock_open</span>
                                             2 modules remaining
                                         </span>
                                     </div>
@@ -189,9 +188,9 @@ const StudentDashboard = () => {
                                         return (
                                             <div key={course.id} className="group cursor-pointer">
                                                 <div className="relative h-40 rounded-xl overflow-hidden mb-4 shadow-sm group-hover:shadow-md transition-shadow border border-outline-variant/20">
-                                                    <img 
-                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                                                        src={course.thumbnail} 
+                                                    <img
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                        src={course.thumbnail}
                                                         alt={course.title}
                                                         onError={(e) => {
                                                             e.target.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500';
@@ -232,14 +231,14 @@ const StudentDashboard = () => {
 
                     {/* Right Column: Deadlines list & Help cards */}
                     <div className="lg:col-span-1 flex flex-col gap-6">
-                        
+
                         {/* Deadlines stat card */}
                         <div className="bg-surface-container rounded-2xl p-6 shadow-sm border border-outline-variant/10">
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="font-headline-md text-sm font-semibold text-on-surface">Upcoming Deadlines</h2>
                                 <span className="material-symbols-outlined text-on-surface-variant">event</span>
                             </div>
-                            
+
                             <div className="space-y-4 text-left">
                                 <div className="flex gap-4 p-4 bg-surface rounded-lg border-l-4 border-error shadow-sm text-xs">
                                     <div className="flex flex-col items-center justify-center w-12 shrink-0 border-r border-surface-variant pr-4">
@@ -274,7 +273,7 @@ const StudentDashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <button className="mt-6 w-full py-2 text-primary font-label-sm text-xs font-semibold hover:underline text-center cursor-pointer">
                                 View Full Calendar
                             </button>

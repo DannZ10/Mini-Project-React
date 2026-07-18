@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
         const savedUser = localStorage.getItem('user');
-        
+
         if (savedToken && savedUser) {
             setToken(savedToken);
             try {
@@ -25,35 +25,31 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    // Session inactivity tracker (30 minutes)
     useEffect(() => {
         if (!token) return;
 
-        // Initialize activity time
         localStorage.setItem('lastActivityTime', Date.now().toString());
 
         const handleActivity = () => {
             localStorage.setItem('lastActivityTime', Date.now().toString());
         };
 
-        // Attach listeners
         window.addEventListener('mousemove', handleActivity);
         window.addEventListener('keydown', handleActivity);
         window.addEventListener('click', handleActivity);
         window.addEventListener('scroll', handleActivity);
 
-        // Check for inactivity every 10 seconds
         const interval = setInterval(() => {
             const lastActivity = Number(localStorage.getItem('lastActivityTime') || Date.now());
             const diff = Date.now() - lastActivity;
-            const timeoutLimit = 30 * 60 * 1000; // 30 minutes in milliseconds
+            const timeoutLimit = 30 * 60 * 1000;
 
             if (diff > timeoutLimit) {
                 console.log("Inactivity timeout. Session expired.");
                 logout();
                 setSessionExpired(true);
             }
-        }, 10000); // 10 seconds check interval
+        }, 10000);
 
         return () => {
             window.removeEventListener('mousemove', handleActivity);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/templates/DashboardLayout';
 import { getCourseStats } from '@/modules/courses/courses.api';
 import useAuth from '@/modules/auth/useAuth';
+import { formatRupiah } from '@/utils/helpers';
 
 const AdminDashboard = () => {
     const { user } = useAuth();
@@ -24,20 +25,11 @@ const AdminDashboard = () => {
         fetchStats();
     }, []);
 
-    // Format currency helper
-    const formatCurrency = (value) => {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(value);
-    };
 
     return (
         <DashboardLayout activeTab="dashboard">
             <div className="flex flex-col w-full text-left">
-                
+
                 {/* Dashboard Welcome Header */}
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between w-full mb-8 gap-4">
                     <div>
@@ -58,7 +50,7 @@ const AdminDashboard = () => {
 
                 {/* Metrics Bento Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    
+
                     {/* Stat Card 1 */}
                     <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group border border-outline-variant/30">
                         <div className="absolute -right-6 -top-6 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
@@ -104,7 +96,7 @@ const AdminDashboard = () => {
                             </div>
                         </div>
                         <p className="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider mb-1">Average Tuition</p>
-                        <h3 className="font-headline-md text-lg text-on-surface truncate">{formatCurrency(stats?.avg_price || 150000)}</h3>
+                        <h3 className="font-headline-md text-lg text-on-surface truncate">{formatRupiah(stats?.avg_price || 150000)}</h3>
                     </div>
 
                     {/* Stat Card 4 */}
@@ -126,10 +118,10 @@ const AdminDashboard = () => {
 
                 {/* Split Panel Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    
+
                     {/* Left 2 Columns: SVG Chart & Actions */}
                     <div className="lg:col-span-2 flex flex-col gap-6">
-                        
+
                         {/* Interactive Trends Box */}
                         <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 lg:p-8 shadow-sm">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-2">
@@ -148,7 +140,7 @@ const AdminDashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             {/* SVG Graph Vector Mockup */}
                             <div className="w-full h-64 relative">
                                 <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 800 250">
@@ -157,23 +149,23 @@ const AdminDashboard = () => {
                                     <line className="text-outline-variant/30" stroke="currentColor" strokeDasharray="4" strokeWidth="1" x1="0" x2="800" y1="150" y2="150"></line>
                                     <line className="text-outline-variant/30" stroke="currentColor" strokeDasharray="4" strokeWidth="1" x1="0" x2="800" y1="200" y2="200"></line>
                                     <line className="text-outline-variant/30" stroke="currentColor" strokeWidth="1" x1="0" x2="800" y1="250" y2="250"></line>
-                                    
+
                                     {/* Line Graph paths */}
                                     <path d="M0,220 C100,200 200,210 300,180 C400,150 500,170 600,140 C700,110 800,90 800,90" fill="none" stroke="#b7c8e1" strokeWidth="3"></path>
                                     <path d="M0,200 C100,180 200,150 300,160 C400,170 500,120 600,80 C700,40 800,60 800,60" fill="none" stroke="#004ac6" strokeWidth="4"></path>
                                     <path d="M0,200 C100,180 200,150 300,160 C400,170 500,120 600,80 C700,40 800,60 800,60 L800,250 L0,250 Z" fill="url(#gradient-primary)" opacity="0.08"></path>
-                                    
+
                                     <defs>
                                         <linearGradient id="gradient-primary" x1="0%" x2="0%" y1="0%" y2="100%">
                                             <stop offset="0%" stopColor="#004ac6" stopOpacity="1"></stop>
                                             <stop offset="100%" stopColor="#004ac6" stopOpacity="0"></stop>
                                         </linearGradient>
                                     </defs>
-                                    
+
                                     <circle cx="300" cy="160" fill="#ffffff" r="4" stroke="#004ac6" strokeWidth="2"></circle>
                                     <circle cx="600" cy="80" fill="#ffffff" r="4" stroke="#004ac6" strokeWidth="2"></circle>
                                 </svg>
-                                
+
                                 <div className="absolute bottom-[-24px] left-0 w-full flex justify-between font-label-sm text-[10px] text-on-surface-variant font-semibold">
                                     <span>Jan</span>
                                     <span>Mar</span>
@@ -217,13 +209,13 @@ const AdminDashboard = () => {
 
                     {/* Right Column: Registrations & Load Metrics */}
                     <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-between">
-                        
+
                         <div>
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="font-headline-md text-base font-semibold text-on-surface">Recent Registrations</h2>
                                 <button className="text-primary font-label-sm text-xs hover:underline cursor-pointer">View All</button>
                             </div>
-                            
+
                             <div className="flex flex-col gap-5">
                                 {/* Registration log items */}
                                 <div className="flex items-center justify-between group cursor-pointer">
@@ -277,7 +269,7 @@ const AdminDashboard = () => {
                             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-surface-container-lowest px-4 text-[10px] font-label-sm text-outline tracking-widest uppercase">
                                 System Load
                             </div>
-                            
+
                             <div className="flex items-center gap-4 mt-2 text-xs">
                                 <span className="font-label-sm text-on-surface w-12">CPU</span>
                                 <div className="flex-grow h-2 bg-surface-container rounded-full overflow-hidden">

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/templates/DashboardLayout';
 import { getCourses } from '@/modules/courses/courses.api';
 import useAuth from '@/modules/auth/useAuth';
+import { formatRupiah } from '@/utils/helpers';
 
 const InstructorDashboard = () => {
     const { user } = useAuth();
-    
+
     const [myCourses, setMyCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,9 +15,8 @@ const InstructorDashboard = () => {
             try {
                 const response = await getCourses();
                 if (response.success && response.data) {
-                    // Filter courses managed by this specific instructor
-                    const filtered = response.data.filter(course => 
-                        course.instructor_id === user?.id || 
+                    const filtered = response.data.filter(course =>
+                        course.instructor_id === user?.id ||
                         course.instructor?.name === user?.name
                     );
                     setMyCourses(filtered);
@@ -30,19 +30,11 @@ const InstructorDashboard = () => {
         fetchInstructorCourses();
     }, [user]);
 
-    const formatCurrency = (value) => {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(value);
-    };
 
     return (
         <DashboardLayout activeTab="dashboard">
             <div className="flex flex-col w-full text-left gap-8 pb-12">
-                
+
                 {/* Welcome Card banner */}
                 <div className="rounded-[24px] shadow-md relative overflow-hidden flex flex-col md:flex-row items-center min-h-[280px] bg-surface-container-low border border-outline-variant/20">
                     <div className="p-8 md:p-12 flex-1 flex flex-col gap-6 z-10 relative w-full md:w-[60%]">
@@ -65,11 +57,11 @@ const InstructorDashboard = () => {
                             </button>
                         </div>
                     </div>
-                    
+
                     {/* Background overlay */}
                     <div className="w-full md:w-[40%] h-full absolute right-0 top-0 pointer-events-none opacity-20 md:opacity-100 z-0">
-                        <div 
-                            className="w-full h-full bg-cover bg-center" 
+                        <div
+                            className="w-full h-full bg-cover bg-center"
                             style={{ backgroundImage: "url('/img/About.jpg')" }}
                         ></div>
                     </div>
@@ -78,7 +70,7 @@ const InstructorDashboard = () => {
 
                 {/* Key Metrics / Stats Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    
+
                     {/* Stat Card 1: Revenue */}
                     <div className="bg-surface-container-lowest rounded-[24px] shadow-md p-8 flex flex-col gap-6 relative group overflow-hidden transition-transform duration-300 hover:-translate-y-1 border border-outline-variant/20">
                         <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl group-hover:bg-primary-container/40 transition-colors"></div>
@@ -175,17 +167,17 @@ const InstructorDashboard = () => {
 
                 {/* Main Split Grid */}
                 <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-                    
+
                     {/* Left Grid: Instructor Active Courses */}
                     <div className="xl:col-span-8 flex flex-col gap-6">
                         <div className="flex items-center justify-between">
                             <h2 className="font-headline-md text-lg font-semibold text-on-surface">Active Courses</h2>
                             <button className="font-label-sm text-xs text-primary hover:text-primary-container transition-colors flex items-center gap-1 group cursor-pointer font-semibold">
-                                View All 
+                                View All
                                 <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </button>
                         </div>
-                        
+
                         {loading ? (
                             <div className="flex flex-col items-center py-10 bg-surface-container-lowest rounded-[24px] border border-outline-variant/20 w-full">
                                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -204,8 +196,8 @@ const InstructorDashboard = () => {
                                     return (
                                         <div key={course.id} className="bg-surface-container-lowest border border-outline-variant/20 rounded-[24px] shadow-md overflow-hidden group flex flex-col transition-all hover:shadow-lg">
                                             <div className="h-48 w-full relative overflow-hidden bg-surface-container">
-                                                <img 
-                                                    src={course.thumbnail} 
+                                                <img
+                                                    src={course.thumbnail}
                                                     alt={course.title}
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                                     onError={(e) => {
@@ -219,30 +211,30 @@ const InstructorDashboard = () => {
                                                     <span className="material-symbols-outlined text-[18px]">more_horiz</span>
                                                 </button>
                                             </div>
-                                            
+
                                             <div className="p-6 flex flex-col flex-grow justify-between gap-6">
                                                 <div>
                                                     <h3 className="font-headline-md text-base text-on-surface font-semibold line-clamp-2">{course.title}</h3>
                                                     <div className="flex items-center gap-4 mt-3 text-xs text-on-surface-variant">
                                                         <span className="flex items-center gap-1">
-                                                            <span className="material-symbols-outlined text-[14px]">group</span> 
+                                                            <span className="material-symbols-outlined text-[14px]">group</span>
                                                             {course.enrolled_count || 12} students
                                                         </span>
                                                         <span className="flex items-center gap-1 font-semibold text-primary">
-                                                            <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span> 
+                                                            <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                                                             {(course.rating / 2).toFixed(1)}
                                                         </span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div className="pt-2">
                                                     <div className="flex justify-between items-end mb-2 text-xs">
                                                         <span className="font-label-sm text-on-surface-variant uppercase tracking-wider">Cohort Progress</span>
                                                         <span className="font-label-sm text-on-surface font-semibold">{progressPct}%</span>
                                                     </div>
                                                     <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                                        <div 
-                                                            className="h-full bg-primary rounded-full relative shadow-[0_0_8px_rgba(0,74,198,0.2)]" 
+                                                        <div
+                                                            className="h-full bg-primary rounded-full relative shadow-[0_0_8px_rgba(0,74,198,0.2)]"
                                                             style={{ width: `${progressPct}%` }}
                                                         ></div>
                                                     </div>
@@ -262,9 +254,9 @@ const InstructorDashboard = () => {
                                 <h2 className="font-headline-md text-base font-semibold text-on-surface">Action Items</h2>
                                 <span className="bg-error-container text-on-error-container font-label-sm text-[10px] px-2.5 py-0.5 rounded shadow-sm font-semibold">3 High Priority</span>
                             </div>
-                            
+
                             <div className="flex flex-col gap-3">
-                                
+
                                 {/* Task 1 */}
                                 <div className="flex items-start gap-4 p-4 rounded-[16px] bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group border border-transparent hover:border-outline-variant/30">
                                     <div className="relative w-4 h-4 mt-1 flex-shrink-0">

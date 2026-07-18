@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '@/modules/auth/useAuth';
 import { loginUser, registerUser } from '@/modules/auth/auth.api';
+import { logoUrl } from '@/data/data';
 
 const LoginRegister = () => {
     const { login, sessionExpired, setSessionExpired } = useAuth();
@@ -12,7 +13,7 @@ const LoginRegister = () => {
     const [registerData, setRegisterData] = useState({ name: '', email: '', password: '', role: 'student' });
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
-    
+
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
@@ -90,11 +91,10 @@ const LoginRegister = () => {
         }
     };
 
-    const logoUrl = 'https://lh3.googleusercontent.com/aida/AP1WRLvxPfEHLHHECFlTQ0IzFZirqRnpVxgSt2WbQuuHzi2Oc1hm_TxPhJQUwaow6RSwzSSi_Caasye2lR6DmTBAQZnHNJS9FYXObnM3OtGxWig64gc6f4wxuJKOa5_M8tFV_rOYZBxYL6CclKFcAGlYI0T4G8WU3Q_dWeAHocOim9wXmIcrrJo8EbwgJw8e0walYF0vxC3ClcajIm_WZ5qRQZOJCAZh2ZoQeoDZ3e0q-T3_hqODNozWMIU0i0g';
 
     return (
         <div className="min-h-screen bg-surface-container-low font-body-md text-on-surface antialiased flex flex-col text-left">
-            
+
             {/* Header / Navbar */}
             <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/20">
                 <div className="h-16 w-full px-margin-desktop flex items-center justify-between">
@@ -116,29 +116,27 @@ const LoginRegister = () => {
             {/* Split Main Content */}
             <main className="w-full pt-16 bg-surface-container-low flex-grow flex">
                 <div className="flex flex-col w-full lg:flex-row min-h-[calc(100vh-64px)] overflow-hidden">
-                    
-                    {/* Left Column: Full bleed image with overlay */}
+
                     <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-center items-center overflow-hidden">
                         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-12 bg-black/25">
                             <h1 className="font-headline-xl text-headline-xl text-white mb-6 drop-shadow-lg text-[48px] font-bold leading-[58px]">
-                                Continue your<br/>
+                                Continue your<br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b4c5ff] to-[#4edea3]">learning journey.</span>
                             </h1>
                             <p className="font-body-lg text-body-lg text-white/95 max-w-[480px] leading-relaxed drop-shadow-md text-sm lg:text-base">
                                 Access your courses, track your progress, and achieve your goals with dibiEdu's intuitive learning platform.
                             </p>
                         </div>
-                        <img 
-                            alt="Student using digital learning tools" 
-                            className="absolute inset-0 w-full h-full object-cover" 
-                            src="/img/login-register.png" 
+                        <img
+                            alt="Student using digital learning tools"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            src="/img/login-register.png"
                         />
                     </div>
 
-                    {/* Right Column: Form Container */}
                     <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-margin-mobile lg:p-margin-desktop bg-surface relative z-10">
                         <div className="w-full max-w-[440px] bg-surface-container-lowest rounded-xl p-8 lg:p-10 shadow-[0_8px_32px_rgba(37,99,235,0.06)] relative border border-outline-variant/30">
-                            
+
                             {/* Alert Banners */}
                             {error && (
                                 <div className="bg-error-container border border-error/20 text-on-error-container p-4 rounded-lg mb-6 text-sm text-left flex items-start gap-2">
@@ -156,7 +154,7 @@ const LoginRegister = () => {
                             {/* Tabs Header */}
                             <div className="flex w-full mb-8 relative">
                                 <div className="absolute bottom-0 left-0 w-full h-[2px] bg-surface-container-high rounded-full"></div>
-                                <button 
+                                <button
                                     id="tab-login"
                                     aria-selected={activeTab === 'login'}
                                     onClick={() => { setActiveTab('login'); setError(''); setSuccess(''); }}
@@ -165,7 +163,7 @@ const LoginRegister = () => {
                                     Login
                                     <div className={`absolute bottom-[-1px] left-0 w-full h-[3px] bg-primary rounded-t-sm z-10 transition-transform duration-300 transform ${activeTab === 'login' ? 'scale-x-100' : 'scale-x-0'}`}></div>
                                 </button>
-                                <button 
+                                <button
                                     id="tab-register"
                                     aria-selected={activeTab === 'register'}
                                     onClick={() => { setActiveTab('register'); setError(''); setSuccess(''); }}
@@ -212,12 +210,12 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="email">Email Address</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px] group-focus-within:text-primary transition-colors">mail</span>
-                                            <input 
-                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                id="email" 
+                                            <input
+                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                id="email"
                                                 name="email"
-                                                placeholder="name@institution.edu" 
-                                                required 
+                                                placeholder="name@institution.edu"
+                                                required
                                                 type="email"
                                                 value={loginData.email}
                                                 onChange={handleLoginChange}
@@ -230,20 +228,20 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="password">Password</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px] group-focus-within:text-primary transition-colors">lock</span>
-                                            <input 
-                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                id="password" 
+                                            <input
+                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                id="password"
                                                 name="password"
-                                                placeholder="••••••••" 
-                                                required 
+                                                placeholder="••••••••"
+                                                required
                                                 type={showPassword ? 'text' : 'password'}
                                                 value={loginData.password}
                                                 onChange={handleLoginChange}
                                             />
-                                            <button 
-                                                aria-label="Toggle password visibility" 
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-on-surface transition-colors cursor-pointer" 
-                                                onClick={() => setShowPassword(!showPassword)} 
+                                            <button
+                                                aria-label="Toggle password visibility"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-on-surface transition-colors cursor-pointer"
+                                                onClick={() => setShowPassword(!showPassword)}
                                                 type="button"
                                             >
                                                 <span className="material-symbols-outlined text-[20px]">{showPassword ? 'visibility_off' : 'visibility'}</span>
@@ -255,8 +253,8 @@ const LoginRegister = () => {
                                     <div className="flex items-center justify-between mt-1">
                                         <label className="flex items-center gap-2 cursor-pointer group">
                                             <div className="relative flex items-center justify-center w-4 h-4">
-                                                <input 
-                                                    className="peer sr-only" 
+                                                <input
+                                                    className="peer sr-only"
                                                     type="checkbox"
                                                     checked={rememberMe}
                                                     onChange={(e) => setRememberMe(e.target.checked)}
@@ -270,9 +268,9 @@ const LoginRegister = () => {
                                     </div>
 
                                     {/* Sign In Button */}
-                                    <button 
+                                    <button
                                         disabled={loading}
-                                        className="w-full h-12 mt-4 bg-primary text-on-primary font-label-md rounded-lg shadow-[0_4px_14px_rgba(37,99,235,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(37,99,235,0.3)] transition-all flex items-center justify-center gap-2 group font-semibold text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50" 
+                                        className="w-full h-12 mt-4 bg-primary text-on-primary font-label-md rounded-lg shadow-[0_4px_14px_rgba(37,99,235,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(37,99,235,0.3)] transition-all flex items-center justify-center gap-2 group font-semibold text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
                                         type="submit"
                                     >
                                         {loading ? 'Signing In...' : 'Sign In'}
@@ -287,12 +285,12 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="register-name">Full Name</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px] group-focus-within:text-primary transition-colors">person</span>
-                                            <input 
-                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                id="register-name" 
+                                            <input
+                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                id="register-name"
                                                 name="name"
-                                                placeholder="Enter your full name" 
-                                                required 
+                                                placeholder="Enter your full name"
+                                                required
                                                 type="text"
                                                 value={registerData.name}
                                                 onChange={handleRegisterChange}
@@ -305,12 +303,12 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="register-email">Email Address</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px] group-focus-within:text-primary transition-colors">mail</span>
-                                            <input 
-                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                id="register-email" 
+                                            <input
+                                                className="w-full h-12 bg-surface pl-10 pr-4 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                id="register-email"
                                                 name="email"
-                                                placeholder="name@institution.edu" 
-                                                required 
+                                                placeholder="name@institution.edu"
+                                                required
                                                 type="email"
                                                 value={registerData.email}
                                                 onChange={handleRegisterChange}
@@ -323,9 +321,9 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="register-role">Role</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px]">badge</span>
-                                            <select 
-                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer text-left" 
-                                                id="register-role" 
+                                            <select
+                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer text-left"
+                                                id="register-role"
                                                 name="role"
                                                 value={registerData.role}
                                                 onChange={handleRegisterChange}
@@ -342,20 +340,20 @@ const LoginRegister = () => {
                                         <label className="font-label-md text-on-surface text-[13px] font-semibold" htmlFor="register-password">Password</label>
                                         <div className="relative">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-[20px] group-focus-within:text-primary transition-colors">lock</span>
-                                            <input 
-                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left" 
-                                                id="register-password" 
+                                            <input
+                                                className="w-full h-12 bg-surface pl-10 pr-10 rounded-lg font-body-md text-on-surface placeholder:text-on-surface-variant/50 outline-none border border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-left"
+                                                id="register-password"
                                                 name="password"
-                                                placeholder="••••••••" 
-                                                required 
+                                                placeholder="••••••••"
+                                                required
                                                 type={showPassword ? 'text' : 'password'}
                                                 value={registerData.password}
                                                 onChange={handleRegisterChange}
                                             />
-                                            <button 
-                                                aria-label="Toggle password visibility" 
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-on-surface transition-colors cursor-pointer" 
-                                                onClick={() => setShowPassword(!showPassword)} 
+                                            <button
+                                                aria-label="Toggle password visibility"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-on-surface transition-colors cursor-pointer"
+                                                onClick={() => setShowPassword(!showPassword)}
                                                 type="button"
                                             >
                                                 <span className="material-symbols-outlined text-[20px]">{showPassword ? 'visibility_off' : 'visibility'}</span>
@@ -364,9 +362,9 @@ const LoginRegister = () => {
                                     </div>
 
                                     {/* Sign Up Button */}
-                                    <button 
+                                    <button
                                         disabled={loading}
-                                        className="w-full h-12 mt-4 bg-primary text-on-primary font-label-md rounded-lg shadow-[0_4px_14px_rgba(37,99,235,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(37,99,235,0.3)] transition-all flex items-center justify-center gap-2 group font-semibold text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50" 
+                                        className="w-full h-12 mt-4 bg-primary text-on-primary font-label-md rounded-lg shadow-[0_4px_14px_rgba(37,99,235,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(37,99,235,0.3)] transition-all flex items-center justify-center gap-2 group font-semibold text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
                                         type="submit"
                                     >
                                         {loading ? 'Creating Account...' : 'Sign Up'}
@@ -380,8 +378,8 @@ const LoginRegister = () => {
                                 {activeTab === 'login' ? (
                                     <>
                                         Don't have an account?{' '}
-                                        <button 
-                                            className="font-label-md text-primary hover:underline underline-offset-4 decoration-primary/50 font-semibold cursor-pointer" 
+                                        <button
+                                            className="font-label-md text-primary hover:underline underline-offset-4 decoration-primary/50 font-semibold cursor-pointer"
                                             onClick={() => { setActiveTab('register'); setError(''); setSuccess(''); }}
                                         >
                                             Sign up
@@ -390,8 +388,8 @@ const LoginRegister = () => {
                                 ) : (
                                     <>
                                         Already have an account?{' '}
-                                        <button 
-                                            className="font-label-md text-primary hover:underline underline-offset-4 decoration-primary/50 font-semibold cursor-pointer" 
+                                        <button
+                                            className="font-label-md text-primary hover:underline underline-offset-4 decoration-primary/50 font-semibold cursor-pointer"
                                             onClick={() => { setActiveTab('login'); setError(''); setSuccess(''); }}
                                         >
                                             Sign in

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formatRupiah } from '@/utils/helpers';
 
 const CourseCard = ({ course }) => {
     const navigate = useNavigate();
@@ -19,16 +20,6 @@ const CourseCard = ({ course }) => {
         return 'bg-surface-variant text-on-surface-variant';
     };
 
-    // Format price to Rupiah
-    const formatPrice = (price) => {
-        if (price === 0) return 'Gratis';
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(price);
-    };
 
     // Map 10-scale rating to 5-star standard (e.g. 9.2 -> 4.6)
     const displayRating = course.rating ? (course.rating / 2).toFixed(1) : '0.0';
@@ -90,7 +81,7 @@ const CourseCard = ({ course }) => {
                         </span>
                     </div>
                     <span className="font-headline-md text-[18px] text-primary">
-                        {formatPrice(course.price)}
+                        {formatRupiah(course.price)}
                     </span>
                 </div>
             </div>

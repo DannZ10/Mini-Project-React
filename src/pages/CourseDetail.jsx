@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MainLayout from '@/components/templates/MainLayout';
 import { CourseDetailSkeleton } from '@/components/atoms/Skeleton';
 import { getCourseById } from '@/modules/courses/courses.api';
+import { formatRupiah } from '@/utils/helpers';
+
 
 const CourseDetail = () => {
     const { id } = useParams();
@@ -34,15 +36,7 @@ const CourseDetail = () => {
         fetchCourseDetail();
     }, [id]);
 
-    const formatPrice = (price) => {
-        if (price === 0) return 'Gratis';
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(price);
-    };
+
 
     const handleEnroll = () => {
         setEnrolled(true);
@@ -205,7 +199,7 @@ const CourseDetail = () => {
                                         <span className="material-symbols-outlined text-[18px]">payments</span>
                                         Course Price
                                     </span>
-                                    <span className="font-headline-md text-lg text-primary">{formatPrice(course.price)}</span>
+                                    <span className="font-headline-md text-lg text-primary">{formatRupiah(course.price)}</span>
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-surface-container-low">
                                     <span className="font-body-sm text-on-surface-variant flex items-center gap-1.5">
