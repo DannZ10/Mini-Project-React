@@ -25,6 +25,13 @@ Aplikasi ini terintegrasi penuh dengan backend **Laravel REST API** untuk autent
 
 ---
 
+## 🌐 Live Deployment
+- **Frontend App**: [https://dibiedu-lms.vercel.app](https://dibiedu-lms.vercel.app)
+- **Status**: ✅ Online (Deployed on Vercel)
+- **Connected Backend API**: [https://mini-project-laravel-production.up.railway.app/api](https://mini-project-laravel-production.up.railway.app/api)
+
+---
+
 ## ✨ Fitur Utama
 
 ### 🎨 Landing Page & Halaman Publik
