@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useAuth from '@/modules/auth/useAuth';
 import { loginUser, registerUser } from '@/modules/auth/auth.api';
 import { logoUrl } from '@/data/data';
@@ -7,6 +7,7 @@ import { logoUrl } from '@/data/data';
 const LoginRegister = () => {
     const { login, sessionExpired, setSessionExpired } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [activeTab, setActiveTab] = useState('login');
     const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -44,7 +45,8 @@ const LoginRegister = () => {
             if (response.success && response.data) {
                 const { user, token } = response.data;
                 login(user, token);
-                navigate('/');
+                const from = location.state?.from?.pathname || '/';
+                navigate(from, { replace: true });
             } else {
                 setError(response.message || 'Login failed. Please check your credentials.');
             }
